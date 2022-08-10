@@ -22,6 +22,7 @@ void send_packet(int nic_fd, struct ipv4_header *ipv4h, struct tcp_header *tcph,
 	size_t buffer_len = 0;
 	buffer_len += dump_ipv4_header(ipv4h, buffer, RAW_OFFSET);
 	buffer_len += dump_tcp_header(tcph, buffer, ipv4h_len + RAW_OFFSET);
+	ipv4h->checksum = ipv4_checksum(buffer + RAW_OFFSET, ipv4h_len / 2);
 	if (write(nic_fd, buffer, buffer_len + RAW_OFFSET) == -1)
 		perror("write over tun");
 }
