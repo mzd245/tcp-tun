@@ -30,7 +30,7 @@ void send_packet(int nic_fd, struct ipv4_header *ipv4h, struct tcp_header *tcph,
 void accept_request(int nic_fd, struct ipv4_header *ipv4h,
 		    struct tcp_header *tcph)
 {
-	struct TCB starter = { .state = SynRecvd,
+	struct TCB starter = { .state = SYNRECVD,
 			       .send = { .iss = 0,
 					 .una = 0,
 					 .nxt = 1,
